@@ -125,6 +125,8 @@
 		<div id="content">
 			<h2>Emotion detection example</h2>
 			<p>This a test of emotion detection based on parameter output from <em>clmtrackr</em>.</p>
+			<h1>FIRST Play the song. Second, press Start below. SMILE to make the song go faster. FROWN to slow down the song</h1>
+			<audio src="./index_files/encore.mp3" controls></audio>
 			<div id="container">
 				<video id="videoel" width="400" height="300" preload="auto" loop="" src="blob:https://auduno.github.io/e1c42a3c-3555-46c4-98a7-1853057bce3b">
 				</video>
@@ -143,9 +145,14 @@
 			<div id="controls">
 				<input class="btn" type="button" value="start" onclick="startVideo()" id="startbutton">
 			</div>
-			<audio src="./index_files/encore.mp3" controls></audio>
 			<a href="https://github.com/auduno/clmtrackr"><img style="position: absolute; top: 0; left: 0; border: 0;" src="./index_files/forkme_left_green_007200.png" alt="Fork me on GitHub"></a>
 			<script>
+				// audio stuffz
+				var context = new (window.AudioContext || window.webkitAudioContext)(); 
+				var audioElement = document.querySelector('audio');
+				var mediaSourceNode = context.createMediaElementSource(audioElement);
+				// mediaSourceNode.connect(filter);
+
 				var vid = document.getElementById('videoel');
 				var overlay = document.getElementById('overlay');
 				var overlayCC = overlay.getContext('2d');
@@ -230,7 +237,15 @@
 					var er = ec.meanPredict(cp);
 					if (er) {
 						updateData(er);
-						console.log(er);
+						// if (er[3])
+						if (er[3].value > 0.4) {
+							mediaSourceNode.mediaElement.playbackRate += 0.002;
+							// console.log(mediaSourceNode.mediaElement.playbackRate);
+						}
+						if (er[1].value > 0.4) {
+							mediaSourceNode.mediaElement.playbackRate -= 0.002;
+							// console.log(mediaSourceNode.mediaElement.playbackRate);
+						}
 						for (var i = 0;i < er.length;i++) {
 							if (er[i].value > 0.4) {
 								document.getElementById('icon'+(i+1)).style.visibility = 'visible';
@@ -245,6 +260,9 @@
 				ec.init(emotionModel);
 				var emotionData = ec.getBlank();	
 				
+
+				mediaSourceNode.connect(context.destination);
+
 				/************ d3 code for barchart *****************/
 
 				var margin = {top : 20, right : 20, bottom : 10, left : 40},
@@ -336,11 +354,11 @@
 
 			<script>
 				// audio stuffz
-				var context = new (window.AudioContext || window.webkitAudioContext)(); 
-				var audioElement = document.querySelector('audio');
-				var mediaSourceNode = context.createMediaElementSource(audioElement);
-				// mediaSourceNode.connect(filter);
-				mediaSourceNode.connect(context.destination);
+				// var context = new (window.AudioContext || window.webkitAudioContext)(); 
+				// var audioElement = document.querySelector('audio');
+				// var mediaSourceNode = context.createMediaElementSource(audioElement);
+				// // mediaSourceNode.connect(filter);
+				// mediaSourceNode.connect(context.destination);
 
 				// var semitoneRatio = Math.pow(2, 1/12);
 				// source.playbackRate.value = Math.pow(semitoneRatio, semitones);
