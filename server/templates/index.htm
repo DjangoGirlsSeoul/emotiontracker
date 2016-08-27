@@ -297,7 +297,7 @@
 				level = {{level}};
 				webcamSpeed = 1;
 				function playMusic() {
-					keyupEvent()
+					_.debounce(keyupEvent(), 250);
 					var original_notes = ['c','d','e','f','g','a','b','n'];
 					var audio_arr = [];
 					_.each(original_notes, function(n){
