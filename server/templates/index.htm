@@ -117,6 +117,45 @@
 :root #content > #center > .dose > .dosesingle,
 :root #content > #right > .dose > .dosesingle
 { display: none !important; }</style>
+<style>
+	#regularKeyboard {
+    display: table;
+    table-layout: fixed;
+    width: 100%;
+    height: 96px;
+}
+#regularKeyboard div {
+    display: table-cell;
+    height: 96px;
+}
+.key {
+    /*White key styling*/
+    background: #fff;
+    /*Default grayed-out look of the key*/
+    border: 1px solid #3F3F3F;
+    z-index: 4;
+    border-bottom: 2px solid #000;
+    border-top: 2px solid #000;
+}
+.innerKey {
+    display: table-cell;
+    height: 100px;
+    width: 0px;
+    z-index: 5;
+}
+.blackkey {
+    position: absolute;
+    /*Black key styling*/
+    background: #000;
+    width: 7%;
+    height: 57px !important;
+    /*Default grayed-out look of the key*/
+    border: 1px solid #3F3F3F;
+    border-top: 2px solid #000;
+    z-index: 6;
+    margin-left: -3.5%;
+}
+</style>
 	</head>
 	<body>
 		<script src="./index_files/utils.js"></script>
@@ -130,7 +169,31 @@
 			<h2>Emotion detection example</h2>
 			<p>This a test of emotion detection based on parameter output from <em>clmtrackr</em>.</p>
 			<h1>FIRST Play the song. Second, press Start below. SMILE to make the song go faster. FROWN to slow down the song</h1>
-			<audio src="./index_files/encore.mp3" controls></audio>
+			<div id="regularKeyboard">
+			    <div class="key chromaC c0menu keyc"></div>
+			    <div class="innerKey">
+			        <div class="blackkey chromaDflat c1menu"></div>
+			    </div>
+			    <div class="key chromaD c2menu keyd"></div>
+			    <div class="innerKey">
+			        <div class="blackkey chromaEflat c3menu"></div>
+			    </div>
+			    <div class="key chromaE c4menu keye"></div>
+			    <div class="key chromaF c5menu keyf"></div>
+			    <div class="innerKey">
+			        <div class="blackkey chromaGflat c6menu"></div>
+			    </div>
+			    <div class="key chromaG c7menu keyg"></div>
+			    <div class="innerKey">
+			        <div class="blackkey chromaAflat c8menu"></div>
+			    </div>
+			    <div class="key chromaA c9menu keya"></div>
+			    <div class="innerKey">
+			        <div class="blackkey chromaBflat c10menu"></div>
+			    </div>
+			    <div class="key chromaB c11menu keyb"></div>
+			    <div class="key chromaB c12menu keyn"></div>
+			</div>
 			<div id="container">
 				<video id="videoel" width="400" height="300" preload="auto" loop="" src="blob:https://auduno.github.io/e1c42a3c-3555-46c4-98a7-1853057bce3b">
 				</video>
@@ -152,9 +215,9 @@
 			<a href="https://github.com/auduno/clmtrackr"><img style="position: absolute; top: 0; left: 0; border: 0;" src="./index_files/forkme_left_green_007200.png" alt="Fork me on GitHub"></a>
 			<script>
 				// audio stuffz
-				var context = new (window.AudioContext || window.webkitAudioContext)();
-				var audioElement = document.querySelector('audio');
-				var mediaSourceNode = context.createMediaElementSource(audioElement);
+				// var context = new (window.AudioContext || window.webkitAudioContext)();
+				// var audioElement = document.querySelector('audio');
+				// var mediaSourceNode = context.createMediaElementSource(audioElement);
 				// mediaSourceNode.connect(filter);
 
 				var vid = document.getElementById('videoel');
@@ -255,8 +318,11 @@
           var currentTime = songs[0].speed * 1000;
           function playAudio() {
               currentTime = (songs[0].speed * 1000) / webcamSpeed;
+              var currentNote = songs[level].notes.shift();
               var currentAudio = note_audio_array.shift();
               console.log('askdljlaksjda', webcamSpeed);
+              $('.key').css('background-color', 'white');
+              $('.key' + currentNote).css('background-color', 'red');
               currentAudio[level].play();
               if (note_audio_array.length > 0){
                   window.setTimeout(playAudio, currentTime);
@@ -336,7 +402,7 @@
 				var emotionData = ec.getBlank();
 
 
-				mediaSourceNode.connect(context.destination);
+				// mediaSourceNode.connect(context.destination);
 
 				/************ d3 code for barchart *****************/
 
