@@ -1,12 +1,16 @@
 import signal
 import subprocess
+import threading
 
+# songs = [{"speed" : 1, "notes" : ['a','b','c','g'] }, {"speed" : 1, "notes" : ['b','c','c','g'] }]
 WEBCAM_SPEED = 3
-
 class AlarmException(Exception):
     pass
 
 class Game:
+    def __init__(self):
+        self.songs = ''
+
     def alarmHandler(self, signum, frame):
         raise AlarmException
 
@@ -44,10 +48,14 @@ class Game:
             print("fail")
             return False
 
-    def start(self, songs):
-        for idx,song in enumerate(songs):
+    def start(self):
+        self.songs = [{"speed" : 1, "notes" : ['a','b','c','g'] }, {"speed" : 1, "notes" : ['b','c','c','g'] }]
+        for idx,song in enumerate(self.songs):
             print("level : {}".format(idx+1))
             passing = self.play_level(song)
             if not passing:
                 print("You failed!!!!!!!!!!!!")
                 exit()
+    def run(self):
+        t = threading.Thread(target=self.start)
+        t.start()
