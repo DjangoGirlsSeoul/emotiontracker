@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template, send_from_directory
+from flask import Flask, request, render_template, send_from_directory, redirect, url_for, abort
 from werkzeug.contrib.cache import SimpleCache
 
 songs = [{"speed" : 1, "notes" : ['a','b','c','g'] }, {"speed" : 1, "notes" : ['b','c','c','g'] }]
@@ -10,7 +10,7 @@ cache.set('webcam_speed', 1)
 
 @app.route('/')
 def main():
-    return render_template('index.htm', level=1)
+    return render_template('index.htm', level=0)
 
 @app.route('/level/<int:level>')
 def play_level(level):
@@ -33,11 +33,15 @@ def check_answers():
     # {level: 1, answers: ['a', 'b', 'c', 'g']}
     
     answers_level = request.get_json()
-    level = answers_level['level']
+    print(answers_level);
+    current_level = answers_level['level']
     answers = answers_level['answers']
-    if songs[level]['notes'] == answers:
-        return redirect_to(play_level, level + 1)
+    if songs[current_level]['notes'] == answers:
+        print('pass!')
+        return redirect(url_for('play_level', level=current_level + 1))
     else:
+        abort(404)
+        print('FIAIL')
         return render_template('fail.html')
 
 

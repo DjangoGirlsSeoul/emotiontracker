@@ -231,7 +231,8 @@
 						}
 					}
 				}
-
+				level = {{level}};
+				webcamSpeed = 1;
 				function playMusic() {
 					keyupEvent()
 					var original_notes = ['c','d','e','f','g','a','b','n'];
@@ -245,30 +246,38 @@
 
 					var songs = [{"speed" : 1, "notes" : ['a','b','c','g'] }, {"speed" : 1, "notes" : ['b','c','c','g'] }]
           var note_audio_array = [];
-          _.each(songs[0].notes,function(note, idx){
+          _.each(songs[level].notes,function(note, idx){
               var note_audio = _.filter(audio_arr,function(a){
                   return a.id == note
               });
               note_audio_array.push(note_audio);
           });
           var currentTime = songs[0].speed * 1000;
-          var webcamSpeed = 1.5;
           function playAudio() {
-              currentTime = (songs[0].speed * 1000) * webcamSpeed;
+              currentTime = (songs[0].speed * 1000) / webcamSpeed;
               var currentAudio = note_audio_array.shift();
-              currentAudio[0].play();
+              console.log('askdljlaksjda', webcamSpeed);
+              currentAudio[level].play();
               if (note_audio_array.length > 0){
                   window.setTimeout(playAudio, currentTime);
               }else{
 								setTimeout(function(){
-									var result_json = {'level' : 0, 'answers' : gameResult};
+									var result_json = {'level' : level, 'answers' : gameResult};
 									console.log("!!!!",result_json);
 									$.ajax({
 									  type: "POST",
 									  url: "/answers",
 									  data: JSON.stringify(result_json),
-										contentType: 'application/json'
-									});
+									  contentType: 'application/json',
+									  success: function(){
+										if (level < 5) {
+											window.location = '/level/' + parseInt(level) + 1;
+										}
+									  },
+									  error: function(){
+									  	window.location = '/fail';
+									  }
+									})
 								},1000);
 							}
           }
@@ -282,12 +291,12 @@
 					// start tracking
 					ctrack.start(vid);
 					// start loop to draw face
-					setInterval(function(){
+					// setInterval(function(){
 						drawLoop();
-					},100)
+					// },100)
 				}
 				function drawLoop() {
-					// requestAnimFrame(drawLoop);
+					requestAnimFrame(drawLoop);
 					overlayCC.clearRect(0, 0, 400, 300);
 					//psrElement.innerHTML = "score :" + ctrack.getScore().toFixed(4);
 					if (ctrack.getCurrentPosition()) {
@@ -301,12 +310,15 @@
 						updateData(er);
 						// if (er[3])
 
-						if (er[3].value > 0.4) {
-							mediaSourceNode.mediaElement.playbackRate += 0.002;
+						if (er[3].value < 0.4) {
+							webcamSpeed = 2;
+							// mediaSourceNode.mediaElement.playbackRate += 0.002;
 							// console.log(mediaSourceNode.mediaElement.playbackRate);
+						} else {
+							webcamSpeed = 1;
 						}
 						if (er[1].value > 0.4) {
-							mediaSourceNode.mediaElement.playbackRate -= 0.002;
+							// mediaSourceNode.mediaElement.playbackRate -= 0.002;
 							// console.log(mediaSourceNode.mediaElement.playbackRate);
 						}
 						for (var i = 0;i < er.length;i++) {
