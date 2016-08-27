@@ -1,5 +1,12 @@
 import signal
 import subprocess
+import curses
+import curses.ascii
+import time
+stdscr = curses.initscr()
+curses.cbreak()
+curses.noecho()
+curses.halfdelay(10) # 10/10 = 1[s] inteval
 
 WEBCAM_SPEED = 3
 
@@ -30,8 +37,17 @@ class Game:
             # send(note)
             # threading.Thread(target=play_audio, kwargs={'audio_file_location': 'audio_files/ox.wav'}).start()
             subprocess.call("afplay /Users/jinpark/Documents/code/emotiontracker/server/audio_files/{}1.wav".format(note), shell=True )
-            input_note = self.nonBlockingRawInput("note: ", song["speed"] * WEBCAM_SPEED)
+            # input_note = self.nonBlockingRawInput("note: ", song["speed"] * WEBCAM_SPEED)
 
+            # try:
+            #     while True:
+            input_note = chr(stdscr.getch())
+                    # if input_note != -1:
+                    #     stdscr.addstr("%s was pressed\n" % input_note)
+                    # stdscr.addstr("time() == %s\n" % time.time())
+            # finally:
+            #     curses.endwin()
+            # input_note = stdscr.getch()
             if input_note == note :
                 score += 1
 
@@ -43,6 +59,7 @@ class Game:
             print("score: {}".format(score))
             print("fail")
             return False
+        curses.endwin()
 
     def start(self, songs):
         for idx,song in enumerate(songs):
@@ -51,3 +68,6 @@ class Game:
             if not passing:
                 print("You failed!!!!!!!!!!!!")
                 exit()
+
+# g = Game()
+# g.start([{"speed" : 1, "notes" : ['d','d','e','e'] }, {"speed" : 1, "notes" : ['b','c','c','g'] }])
