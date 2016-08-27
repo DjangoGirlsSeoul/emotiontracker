@@ -12,6 +12,11 @@ cache.set('webcam_speed', 1)
 def main():
     return render_template('index.htm', level=0)
 
+@app.route('/piano')
+def piano():
+    return render_template('piano.html', level=0)
+
+
 @app.route('/level/<int:level>')
 def play_level(level):
     if level < 5:
