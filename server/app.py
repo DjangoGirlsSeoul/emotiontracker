@@ -1,9 +1,8 @@
-import threading
 from flask import Flask, request, render_template, send_from_directory
 from werkzeug.contrib.cache import SimpleCache
 from game import Game
 
-songs = [{"speed" : 1, "notes" : ['a','b','c','g'] }, {"speed" : 1, "notes" : ['b','c','c','g'] }]
+# songs = [{"speed" : 1, "notes" : ['a','b','c','g'] }, {"speed" : 1, "notes" : ['b','c','c','g'] }]
 WEBCAM_SPEED = 1
 
 app = Flask(__name__)
@@ -13,7 +12,7 @@ cache.set('webcam_speed', 1)
 @app.route('/')
 def main():
     g = Game()
-    threading.Thread(target=g.start(), kwargs={'songs': songs}).start()
+    g.run()
     return render_template('index.htm')
 
 ##{'[{"emotion":"angry","value":0.03350348808431149},{"emotion":"sad","value":0.31215305776434915},{"emotion":"surprised","value":0.16222857011091235},{"emotion":"happy","value":0.04008017326503987}]': u''}
