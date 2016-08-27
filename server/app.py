@@ -2,7 +2,7 @@ from flask import Flask, request, render_template, send_from_directory
 from werkzeug.contrib.cache import SimpleCache
 from game import Game
 
-# songs = [{"speed" : 1, "notes" : ['a','b','c','g'] }, {"speed" : 1, "notes" : ['b','c','c','g'] }]
+songs = [{"speed" : 1, "notes" : ['a','b','c','g'] }, {"speed" : 1, "notes" : ['b','c','c','g'] }]
 WEBCAM_SPEED = 1
 
 app = Flask(__name__)
@@ -11,9 +11,14 @@ cache.set('webcam_speed', 1)
 
 @app.route('/')
 def main():
-    g = Game()
-    g.run()
-    return render_template('index.htm')
+    return render_template('index.htm', level=1)
+
+@app.route('/level/<int:level>')
+def play_level(level):
+    if level < 5:
+        return render_template('index.htm', level=level)
+    else:
+        return render_template('win.html')
 
 ##{'[{"emotion":"angry","value":0.03350348808431149},{"emotion":"sad","value":0.31215305776434915},{"emotion":"surprised","value":0.16222857011091235},{"emotion":"happy","value":0.04008017326503987}]': u''}
 @app.route('/emotions', methods=['POST'])
@@ -23,6 +28,18 @@ def get_emotions():
     if happy_point < 0.3:
         cache.set('webcam_speed', 2)
     return 'Hello World!'
+
+@app.route('/answers', methods=['POST'])
+def check_answers():
+    # {level: 1, answers: ['a', 'b', 'c', 'g']}
+    answers_level = request.get_json()
+    level = answers_level['level']
+    answers = answers_level['answers']
+    if songs[level]['notes'] == answers:
+        return redirect_to(play_level, level + 1)
+    else:
+        return render_template('fail.html')
+
 
 
 @app.route('/index_files/<path:path>')
