@@ -219,14 +219,21 @@
 
 				var ctrack = new clm.tracker({useWebGL : true});
 				ctrack.init(pModel);
-				document.addEventListener("keydown", keyDownTextField, false);
-				function keyDownTextField(e) {
-					var keyCode = e.keyCode;
-
+				var keycodeMap = {'67':'c','68': 'd','69': 'e','70': 'f','71': 'g','65': 'a','66':'b','78':'n'}
+				var gameResult = [];
+				function keyupEvent(){
+					document.addEventListener("keyup", keyDownTextField, false);
+					function keyDownTextField(e) {
+						var keyCode = e.keyCode,
+								keyCodeStr = keyCode.toString();
+						if(Object.keys(keycodeMap).indexOf(keyCodeStr) != -1){
+							gameResult.push(keycodeMap[keyCodeStr]);
+						}
+					}
 				}
 
-
 				function playMusic() {
+					keyupEvent()
 					var original_notes = ['c','d','e','f','g','a','b','n'];
 					var audio_arr = [];
 					_.each(original_notes, function(n){
@@ -237,12 +244,35 @@
 					});
 
 					var songs = [{"speed" : 1, "notes" : ['a','b','c','g'] }, {"speed" : 1, "notes" : ['b','c','c','g'] }]
-					_.each(songs[0].notes,function(note){
-						var note_audio = _.filter(audio_arr,function(a){
-							return a.id == note
-						});
-						note_audio.play();
-					});
+          var note_audio_array = [];
+          _.each(songs[0].notes,function(note, idx){
+              var note_audio = _.filter(audio_arr,function(a){
+                  return a.id == note
+              });
+              note_audio_array.push(note_audio);
+          });
+          var currentTime = songs[0].speed * 1000;
+          var webcamSpeed = 1.5;
+          function playAudio() {
+              currentTime = (songs[0].speed * 1000) * webcamSpeed;
+              var currentAudio = note_audio_array.shift();
+              currentAudio[0].play();
+              if (note_audio_array.length > 0){
+                  window.setTimeout(playAudio, currentTime);
+              }else{
+								setTimeout(function(){
+									var result_json = {'level' : 0, 'answers' : gameResult};
+									console.log("!!!!",result_json);
+									$.ajax({
+									  type: "POST",
+									  url: "/answers",
+									  data: JSON.stringify(result_json),
+										contentType: 'application/json'
+									});
+								},1000);
+							}
+          }
+          window.setTimeout(playAudio, currentTime);
 				}
 
 				function startVideo() {

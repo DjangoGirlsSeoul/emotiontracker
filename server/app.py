@@ -31,6 +31,7 @@ def get_emotions():
 @app.route('/answers', methods=['POST'])
 def check_answers():
     # {level: 1, answers: ['a', 'b', 'c', 'g']}
+    
     answers_level = request.get_json()
     level = answers_level['level']
     answers = answers_level['answers']
