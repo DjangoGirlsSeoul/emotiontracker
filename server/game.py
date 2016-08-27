@@ -53,10 +53,10 @@ class Game:
                 print("You failed!!!!!!!!!!!!")
                 exit()
 
-g = Game()
-g.start(
-    [
-    {"speed" : 1, "notes" : ['a','b','c','g'] }, 
-    {"speed" : 1, "notes" : ['b','c','c','g'] }
-    ]
-    )
+# g = Game()
+# g.start(
+#     [
+#     {"speed" : 1, "notes" : ['a','b','c','g'] },
+#     {"speed" : 1, "notes" : ['b','c','c','g'] }
+#     ]
+#     )
