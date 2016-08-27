@@ -79,11 +79,25 @@
 
                 var original_notes = ['c','d','e','f','g','a','b','n'];
                 audio_json = {};
+                audio_buffer_json = {};
+                var audioContext = new (window.AudioContext || window.webkitAudioContext)();
                 _.each(original_notes, function(n){
-                    var a = new Audio();
-                    a.id = n;
-                    a.src = './index_files/audio_files/'+n+'.wav';
-                    audio_json[n] = a;
+                    var source = audioContext.createBufferSource();
+                    var request = new XMLHttpRequest();
+                    request.open('GET', './index_files/audio_files/'+n+'.wav', true);
+                    // request.open('GET', 'http://freewavesamples.com/files/Boom-Kick.wav', true);
+                    request.responseType = 'arraybuffer';
+                    // console.log(request.response);
+                    request.onload = function(){
+                        audioContext.decodeAudioData(request.response, function(buffer) {
+                            source.buffer = buffer;
+                            audio_buffer_json[n] = buffer;
+                            source.connect(audioContext.destination);
+                            console.log(source);
+                            audio_json[n] = source;
+                        });
+                    }
+                    request.send();
                 });
                 console.log(audio_json);
                 function keyupEvent(){
@@ -93,7 +107,10 @@
                                 keyCodeStr = keyCode.toString();
                         if(Object.keys(keycodeMap).indexOf(keyCodeStr) != -1){
                             currentNote = keycodeMap[keyCodeStr];
-                            audio_json[currentNote].play();
+                            audio_json[currentNote].start(0);
+                            audio_json[currentNote] = audioContext.createBufferSource();
+                            audio_json[currentNote].buffer = audio_buffer_json[currentNote];
+                            audio_json[currentNote].connect(audioContext.destination);
                             $('.key').css('background-color', 'white');
                             $('.key' + currentNote).css('background-color', 'red');
                         }
