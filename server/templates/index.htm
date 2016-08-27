@@ -110,6 +110,7 @@
 				window.location.protocol = "https";
 			}
 		</script>
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
 		<script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s=" crossorigin="anonymous"></script>
 		<style type="text/css">
 
@@ -218,18 +219,43 @@
 
 				var ctrack = new clm.tracker({useWebGL : true});
 				ctrack.init(pModel);
+				document.addEventListener("keydown", keyDownTextField, false);
+				function keyDownTextField(e) {
+					var keyCode = e.keyCode;
+
+				}
+
+
+				function playMusic() {
+					var original_notes = ['c','d','e','f','g','a','b','n'];
+					var audio_arr = [];
+					_.each(original_notes, function(n){
+						var a = new Audio();
+						a.id = n;
+						a.src = '/audio_files/'+n+'.wav'
+						audio_arr.push(a);
+					});
+
+					var songs = [{"speed" : 1, "notes" : ['a','b','c','g'] }, {"speed" : 1, "notes" : ['b','c','c','g'] }]
+					_.each(songs[0].notes,function(note){
+						var note_audio = _.filter(audio_arr,function(a){
+							return a.id == note
+						});
+						note_audio.play();
+					});
+				}
 
 				function startVideo() {
 					// start video
 					vid.play();
+					playMusic();
 					// start tracking
 					ctrack.start(vid);
 					// start loop to draw face
 					setInterval(function(){
 						drawLoop();
-					}, 100)
+					},100)
 				}
-
 				function drawLoop() {
 					// requestAnimFrame(drawLoop);
 					overlayCC.clearRect(0, 0, 400, 300);
@@ -240,12 +266,6 @@
 					var cp = ctrack.getCurrentParameters();
 
 					var er = ec.meanPredict(cp);
-					$.ajax({
-					  type: "POST",
-					  url: "/emotions",
-					  data: JSON.stringify(er),
-						contentType: 'application/json'
-					});
 
 					if (er) {
 						updateData(er);
@@ -365,19 +385,6 @@
 
 			</script>
 
-			<script>
-				// audio stuffz
-				// var context = new (window.AudioContext || window.webkitAudioContext)();
-				// var audioElement = document.querySelector('audio');
-				// var mediaSourceNode = context.createMediaElementSource(audioElement);
-				// // mediaSourceNode.connect(filter);
-				// mediaSourceNode.connect(context.destination);
-
-				// var semitoneRatio = Math.pow(2, 1/12);
-				// source.playbackRate.value = Math.pow(semitoneRatio, semitones);
-
-
-			</script>
 		</div><canvas width="11px" height="781px" id="renderCanvas" style="display:none;"></canvas>
 
 
