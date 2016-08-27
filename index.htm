@@ -2,18 +2,18 @@
 <!-- saved from url=(0069)https://auduno.github.io/clmtrackr/examples/clm_emotiondetection.html -->
 <html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<title>Face tracker</title>
-		
+
 		<link href="./index_files/bootstrap.min.css" rel="stylesheet" type="text/css">
 		<style>
 			@import url(https://fonts.googleapis.com/css?family=Lato:300italic,700italic,300,700);
-			
+
 			body {
 				font-family: 'Lato';
 				background-color: #f0f0f0;
 				margin: 0px auto;
 				max-width: 1150px;
 			}
-			
+
 			#overlay {
 				position: absolute;
 				top: 0px;
@@ -38,28 +38,28 @@
 				width : 600px;
 				height : 450px;
 			}
-			
+
 			#container {
 				position : relative;
 				width : 370px;
 				/*margin : 0px auto;*/
 			}
-			
+
 			#content {
 				margin-top : 50px;
 				margin-left : auto;
 				margin-right : auto;
 				max-width: 600px;
 			}
-			
+
 			#sketch, #filter {
 				display: none;
 			}
-			
+
 			h2 {
 				font-weight : 400;
 			}
-			
+
 			.btn {
 				font-family: 'Lato';
 				font-size: 16px;
@@ -109,7 +109,10 @@
 			} else if (window.location.hostname !== "localhost" && window.location.protocol !== "https:"){
 				window.location.protocol = "https";
 			}
-		</script><style type="text/css">
+		</script>
+		<script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s=" crossorigin="anonymous"></script>
+		<style type="text/css">
+
 :root #content > #center > .dose > .dosesingle,
 :root #content > #right > .dose > .dosesingle
 { display: none !important; }</style>
@@ -148,7 +151,7 @@
 			<a href="https://github.com/auduno/clmtrackr"><img style="position: absolute; top: 0; left: 0; border: 0;" src="./index_files/forkme_left_green_007200.png" alt="Fork me on GitHub"></a>
 			<script>
 				// audio stuffz
-				var context = new (window.AudioContext || window.webkitAudioContext)(); 
+				var context = new (window.AudioContext || window.webkitAudioContext)();
 				var audioElement = document.querySelector('audio');
 				var mediaSourceNode = context.createMediaElementSource(audioElement);
 				// mediaSourceNode.connect(filter);
@@ -156,7 +159,7 @@
 				var vid = document.getElementById('videoel');
 				var overlay = document.getElementById('overlay');
 				var overlayCC = overlay.getContext('2d');
-				
+
 				/********** check and set up video/webcam **********/
 
 				function enablestart() {
@@ -164,7 +167,7 @@
 					startbutton.value = "start";
 					startbutton.disabled = null;
 				}
-				
+
 				/*var insertAltVideo = function(video) {
 					if (supports_video()) {
 						if (supports_ogg_theora_video()) {
@@ -184,7 +187,7 @@
 				// check for camerasupport
 				if (navigator.getUserMedia) {
 					// set up stream
-					
+
 					var videoSelector = {video : true};
 					if (window.navigator.appVersion.match(/Chrome\/(.*?) /)) {
 						var chromeVersion = parseInt(window.navigator.appVersion.match(/Chrome\/(\d+)\./)[1], 10);
@@ -192,7 +195,7 @@
 							videoSelector = "video";
 						}
 					};
-				
+
 					navigator.getUserMedia(videoSelector, function( stream ) {
 						if (vid.mozCaptureStream) {
 							vid.mozSrcObject = stream;
@@ -210,7 +213,7 @@
 				}
 
 				vid.addEventListener('canplay', enablestart, false);
-				
+
 				/*********** setup of emotion detection *************/
 
 				var ctrack = new clm.tracker({useWebGL : true});
@@ -222,22 +225,30 @@
 					// start tracking
 					ctrack.start(vid);
 					// start loop to draw face
-					drawLoop();
+					setInterval(function(){
+						drawLoop();
+					}, 100)
 				}
-				
+
 				function drawLoop() {
-					requestAnimFrame(drawLoop);
+					// requestAnimFrame(drawLoop);
 					overlayCC.clearRect(0, 0, 400, 300);
 					//psrElement.innerHTML = "score :" + ctrack.getScore().toFixed(4);
 					if (ctrack.getCurrentPosition()) {
 						ctrack.draw(overlay);
 					}
 					var cp = ctrack.getCurrentParameters();
-					
+
 					var er = ec.meanPredict(cp);
+					$.ajax({
+						url: "/emotion",
+						method : "POST",
+						data : er
+					});
 					if (er) {
 						updateData(er);
 						// if (er[3])
+
 						if (er[3].value > 0.4) {
 							mediaSourceNode.mediaElement.playbackRate += 0.002;
 							// console.log(mediaSourceNode.mediaElement.playbackRate);
@@ -255,11 +266,11 @@
 						}
 					}
 				}
-				
+
 				var ec = new emotionClassifier();
 				ec.init(emotionModel);
-				var emotionData = ec.getBlank();	
-				
+				var emotionData = ec.getBlank();
+
 
 				mediaSourceNode.connect(context.destination);
 
@@ -272,7 +283,7 @@
 				var barWidth = 30;
 
 				var formatPercent = d3.format(".0%");
-				
+
 				var x = d3.scale.linear()
 					.domain([0, ec.getEmotions().length]).range([margin.left, width+margin.left]);
 
@@ -282,7 +293,7 @@
 				var svg = d3.select("#emotion_chart").append("svg")
 					.attr("width", width + margin.left + margin.right)
 					.attr("height", height + margin.top + margin.bottom)
-				
+
 				svg.selectAll("rect").
 				  data(emotionData).
 				  enter().
@@ -305,7 +316,7 @@
 				  text(function(datum) { return datum.value;}).
 				  attr("fill", "white").
 				  attr("class", "labels");
-				
+
 				svg.selectAll("text.yAxis").
 				  data(emotionData).
 				  enter().append("svg:text").
@@ -329,7 +340,7 @@
 						.attr("y", function(datum) { return height - y(datum.value); })
 						.text(function(datum) { return datum.value.toFixed(1);});
 
-					// enter 
+					// enter
 					rects.enter().append("svg:rect");
 					texts.enter().append("svg:text");
 
@@ -349,12 +360,12 @@
 				document.addEventListener('clmtrackrIteration', function(event) {
 					stats.update();
 				}, false);
-				
+
 			</script>
 
 			<script>
 				// audio stuffz
-				// var context = new (window.AudioContext || window.webkitAudioContext)(); 
+				// var context = new (window.AudioContext || window.webkitAudioContext)();
 				// var audioElement = document.querySelector('audio');
 				// var mediaSourceNode = context.createMediaElementSource(audioElement);
 				// // mediaSourceNode.connect(filter);
@@ -366,6 +377,6 @@
 
 			</script>
 		</div><canvas width="11px" height="781px" id="renderCanvas" style="display:none;"></canvas>
-	
+
 
 </body></html>
