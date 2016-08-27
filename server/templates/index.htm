@@ -241,10 +241,12 @@
 
 					var er = ec.meanPredict(cp);
 					$.ajax({
-						url: "/emotion",
-						method : "POST",
-						data : er
+					  type: "POST",
+					  url: "/emotions",
+					  data: JSON.stringify(er),
+						contentType: 'application/json'
 					});
+
 					if (er) {
 						updateData(er);
 						// if (er[3])
