@@ -1,8 +1,7 @@
 import signal
-from audio import play_audio
-import threading
+import subprocess
 
-WEBCAM_SPEED = 1
+WEBCAM_SPEED = 3
 
 class AlarmException(Exception):
     pass
@@ -19,6 +18,7 @@ class Game:
             signal.alarm(0)
             return text
         except AlarmException:
+            raw_inp = None
             print '\nPrompt timeout. Continuing...'
         signal.signal(signal.SIGALRM, signal.SIG_IGN)
         return ''
@@ -28,9 +28,8 @@ class Game:
         success_score = len(song["notes"]) * 0.8
         for note in song["notes"]:
             # send(note)
-            threading.Thread(target=play_audio, kwargs={'audio_file_location': 'audio_files/ox.wav'}).start()
-            print('asdasdasasda')
-            print(note)
+            # threading.Thread(target=play_audio, kwargs={'audio_file_location': 'audio_files/ox.wav'}).start()
+            subprocess.call("afplay /Users/jinpark/Documents/code/emotiontracker/server/audio_files/{}1.wav".format(note), shell=True )
             input_note = self.nonBlockingRawInput("note: ", song["speed"] * WEBCAM_SPEED)
 
             if input_note == note :
@@ -53,10 +52,10 @@ class Game:
                 print("You failed!!!!!!!!!!!!")
                 exit()
 
-g = Game()
-g.start(
-    [
-    {"speed" : 1, "notes" : ['a','b','c','g'] }, 
-    {"speed" : 1, "notes" : ['b','c','c','g'] }
-    ]
-    )
+# g = Game()
+# g.start(
+#     [
+#     {"speed" : 1, "notes" : ['a','b','c','g'] }, 
+#     {"speed" : 1, "notes" : ['b','c','c','g'] }
+#     ]
+#     )
