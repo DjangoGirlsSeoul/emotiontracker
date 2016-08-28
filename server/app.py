@@ -28,6 +28,13 @@ def play_level(level):
     else:
         return render_template('win.html')
 
+@app.route('/game/level/<int:level>')
+def game_level(level):
+    if level < 5:
+        return render_template('game.html', level=level)
+    else:
+        return render_template('win.html')
+
 ##{'[{"emotion":"angry","value":0.03350348808431149},{"emotion":"sad","value":0.31215305776434915},{"emotion":"surprised","value":0.16222857011091235},{"emotion":"happy","value":0.04008017326503987}]': u''}
 # @app.route('/emotions', methods=['POST'])
 def get_emotions():
@@ -48,6 +55,22 @@ def check_answers():
     if songs[current_level]['notes'] == answers:
         print('pass!')
         return redirect(url_for('play_level', level=current_level + 1))
+    else:
+        abort(404)
+        print('FIAIL')
+        return render_template('fail.html')
+
+@app.route('/game/answers', methods=['POST'])
+def check_game_answers():
+    # {level: 1, answers: ['a', 'b', 'c', 'g']}
+    songs = [{"speed" : 1, "notes" : ['e','d','c','d','e','e','e']}, {"speed" : 2, "notes" : ['g','g','a','a','g','g','e']}]
+    answers_level = request.get_json()
+    print(answers_level);
+    current_level = answers_level['level']
+    answers = answers_level['answers']
+    if songs[current_level]['notes'] == answers:
+        print('pass!')
+        return redirect(url_for('game_level', level=current_level + 1))
     else:
         abort(404)
         print('FIAIL')
