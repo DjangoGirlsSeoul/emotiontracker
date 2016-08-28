@@ -101,7 +101,7 @@
                 });
                 console.log(audio_json);
                 function keyupEvent(){
-                    document.addEventListener("keyup", keyDownTextField, false);
+                    document.addEventListener("keyup", _.throttle(keyDownTextField,400), false);
                     function keyDownTextField(e) {
                         var keyCode = e.keyCode,
                                 keyCodeStr = keyCode.toString();

@@ -16,6 +16,10 @@ def main():
 def piano():
     return render_template('piano.html', level=0)
 
+@app.route('/game')
+def game():
+    return render_template('game.html', level=0)
+
 
 @app.route('/level/<int:level>')
 def play_level(level):
@@ -36,7 +40,7 @@ def get_emotions():
 @app.route('/answers', methods=['POST'])
 def check_answers():
     # {level: 1, answers: ['a', 'b', 'c', 'g']}
-    
+
     answers_level = request.get_json()
     print(answers_level);
     current_level = answers_level['level']
