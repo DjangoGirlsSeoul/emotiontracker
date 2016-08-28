@@ -37,6 +37,12 @@
 
 				width : 600px;
 				height : 450px;
+				float: left;
+			}
+
+			.speed {
+				float: right;
+				font-size: 4em;
 			}
 
 			#container {
@@ -72,6 +78,7 @@
 			#emotion_container {
 				display: inline-block;
 				width: 440px;
+				float: right;
 			}
 
 			#emotion_icons {
@@ -177,6 +184,9 @@
 				<video id="videoel" width="400" height="300" preload="auto" loop="" src="blob:https://auduno.github.io/e1c42a3c-3555-46c4-98a7-1853057bce3b">
 				</video>
 				<canvas id="overlay" width="400" height="300"></canvas>
+				<div class="speed">
+					LEVEL {{level}}
+				</div>
 				<div id="emotion_container">
 					<div id="emotion_icons">
 						<img class="emotion_icon" id="icon1" src="./index_files/icon_angry.png">
@@ -186,7 +196,7 @@
 					</div>
 					<div id="emotion_chart"><svg width="440" height="100"><rect x="40" y="70" height="0" width="30" fill="#2d578b"></rect><rect x="125" y="70" height="0" width="30" fill="#2d578b"></rect><rect x="210" y="70" height="0" width="30" fill="#2d578b"></rect><rect x="295" y="70" height="0" width="30" fill="#2d578b"></rect><text x="70" y="70" dx="-15" dy="1.2em" text-anchor="middle" fill="white" class="labels">0</text><text x="155" y="70" dx="-15" dy="1.2em" text-anchor="middle" fill="white" class="labels">0</text><text x="240" y="70" dx="-15" dy="1.2em" text-anchor="middle" fill="white" class="labels">0</text><text x="325" y="70" dx="-15" dy="1.2em" text-anchor="middle" fill="white" class="labels">0</text><text x="70" y="70" dx="-15" text-anchor="middle" style="font-size: 12" transform="translate(0, 18)" class="yAxis">angry</text><text x="155" y="70" dx="-15" text-anchor="middle" style="font-size: 12" transform="translate(0, 18)" class="yAxis">sad</text><text x="240" y="70" dx="-15" text-anchor="middle" style="font-size: 12" transform="translate(0, 18)" class="yAxis">surprised</text><text x="325" y="70" dx="-15" text-anchor="middle" style="font-size: 12" transform="translate(0, 18)" class="yAxis">happy</text></svg></div>
 				</div>
-			<div style="cursor: pointer; width: 80px; opacity: 0.9; z-index: 10001; position: absolute; top: 0px;"><div style="text-align: left; line-height: 1.2em; padding: 0px 0px 3px 3px; background-color: rgb(8, 8, 24);"><div style="font-family: Helvetica, Arial, sans-serif; font-size: 9px; color: rgb(0, 255, 255); font-weight: bold;">FPS</div><div style="position: relative; width: 74px; height: 30px; background-color: rgb(0, 255, 255);"><span style="width: 1px; height: 30px; float: left; background-color: rgb(16, 16, 48);"></span><span style="width: 1px; height: 30px; float: left; background-color: rgb(16, 16, 48);"></span><span style="width: 1px; height: 30px; float: left; background-color: rgb(16, 16, 48);"></span><span style="width: 1px; height: 30px; float: left; background-color: rgb(16, 16, 48);"></span><span style="width: 1px; height: 30px; float: left; background-color: rgb(16, 16, 48);"></span><span style="width: 1px; height: 30px; float: left; background-color: rgb(16, 16, 48);"></span><span style="width: 1px; height: 30px; float: left; background-color: rgb(16, 16, 48);"></span><span style="width: 1px; height: 30px; float: left; background-color: rgb(16, 16, 48);"></span><span style="width: 1px; height: 30px; float: left; background-color: rgb(16, 16, 48);"></span><span style="width: 1px; height: 30px; float: left; background-color: rgb(16, 16, 48);"></span><span style="width: 1px; height: 30px; float: left; background-color: rgb(16, 16, 48);"></span><span style="width: 1px; height: 30px; float: left; background-color: rgb(16, 16, 48);"></span><span style="width: 1px; height: 30px; float: left; background-color: rgb(16, 16, 48);"></span><span style="width: 1px; height: 30px; float: left; background-color: rgb(16, 16, 48);"></span><span style="width: 1px; height: 30px; float: left; background-color: rgb(16, 16, 48);"></span><span style="width: 1px; height: 30px; float: left; background-color: rgb(16, 16, 48);"></span><span style="width: 1px; height: 30px; float: left; background-color: rgb(16, 16, 48);"></span><span style="width: 1px; height: 30px; float: left; background-color: rgb(16, 16, 48);"></span><span style="width: 1px; height: 30px; float: left; background-color: rgb(16, 16, 48);"></span><span style="width: 1px; height: 30px; float: left; background-color: rgb(16, 16, 48);"></span><span style="width: 1px; height: 30px; float: left; background-color: rgb(16, 16, 48);"></span><span style="width: 1px; height: 30px; float: left; background-color: rgb(16, 16, 48);"></span><span style="width: 1px; height: 30px; float: left; background-color: rgb(16, 16, 48);"></span><span style="width: 1px; height: 30px; float: left; background-color: rgb(16, 16, 48);"></span><span style="width: 1px; height: 30px; float: left; background-color: rgb(16, 16, 48);"></span><span style="width: 1px; height: 30px; float: left; background-color: rgb(16, 16, 48);"></span><span style="width: 1px; height: 30px; float: left; background-color: rgb(16, 16, 48);"></span><span style="width: 1px; height: 30px; float: left; background-color: rgb(16, 16, 48);"></span><span style="width: 1px; height: 30px; float: left; background-color: rgb(16, 16, 48);"></span><span style="width: 1px; height: 30px; float: left; background-color: rgb(16, 16, 48);"></span><span style="width: 1px; height: 30px; float: left; background-color: rgb(16, 16, 48);"></span><span style="width: 1px; height: 30px; float: left; background-color: rgb(16, 16, 48);"></span><span style="width: 1px; height: 30px; float: left; background-color: rgb(16, 16, 48);"></span><span style="width: 1px; height: 30px; float: left; background-color: rgb(16, 16, 48);"></span><span style="width: 1px; height: 30px; float: left; background-color: rgb(16, 16, 48);"></span><span style="width: 1px; height: 30px; float: left; background-color: rgb(16, 16, 48);"></span><span style="width: 1px; height: 30px; float: left; background-color: rgb(16, 16, 48);"></span><span style="width: 1px; height: 30px; float: left; background-color: rgb(16, 16, 48);"></span><span style="width: 1px; height: 30px; float: left; background-color: rgb(16, 16, 48);"></span><span style="width: 1px; height: 30px; float: left; background-color: rgb(16, 16, 48);"></span><span style="width: 1px; height: 30px; float: left; background-color: rgb(16, 16, 48);"></span><span style="width: 1px; height: 30px; float: left; background-color: rgb(16, 16, 48);"></span><span style="width: 1px; height: 30px; float: left; background-color: rgb(16, 16, 48);"></span><span style="width: 1px; height: 30px; float: left; background-color: rgb(16, 16, 48);"></span><span style="width: 1px; height: 30px; float: left; background-color: rgb(16, 16, 48);"></span><span style="width: 1px; height: 30px; float: left; background-color: rgb(16, 16, 48);"></span><span style="width: 1px; height: 30px; float: left; background-color: rgb(16, 16, 48);"></span><span style="width: 1px; height: 30px; float: left; background-color: rgb(16, 16, 48);"></span><span style="width: 1px; height: 30px; float: left; background-color: rgb(16, 16, 48);"></span><span style="width: 1px; height: 30px; float: left; background-color: rgb(16, 16, 48);"></span><span style="width: 1px; height: 30px; float: left; background-color: rgb(16, 16, 48);"></span><span style="width: 1px; height: 30px; float: left; background-color: rgb(16, 16, 48);"></span><span style="width: 1px; height: 30px; float: left; background-color: rgb(16, 16, 48);"></span><span style="width: 1px; height: 30px; float: left; background-color: rgb(16, 16, 48);"></span><span style="width: 1px; height: 30px; float: left; background-color: rgb(16, 16, 48);"></span><span style="width: 1px; height: 30px; float: left; background-color: rgb(16, 16, 48);"></span><span style="width: 1px; height: 30px; float: left; background-color: rgb(16, 16, 48);"></span><span style="width: 1px; height: 30px; float: left; background-color: rgb(16, 16, 48);"></span><span style="width: 1px; height: 30px; float: left; background-color: rgb(16, 16, 48);"></span><span style="width: 1px; height: 30px; float: left; background-color: rgb(16, 16, 48);"></span><span style="width: 1px; height: 30px; float: left; background-color: rgb(16, 16, 48);"></span><span style="width: 1px; height: 30px; float: left; background-color: rgb(16, 16, 48);"></span><span style="width: 1px; height: 30px; float: left; background-color: rgb(16, 16, 48);"></span><span style="width: 1px; height: 30px; float: left; background-color: rgb(16, 16, 48);"></span><span style="width: 1px; height: 30px; float: left; background-color: rgb(16, 16, 48);"></span><span style="width: 1px; height: 30px; float: left; background-color: rgb(16, 16, 48);"></span><span style="width: 1px; height: 30px; float: left; background-color: rgb(16, 16, 48);"></span><span style="width: 1px; height: 30px; float: left; background-color: rgb(16, 16, 48);"></span><span style="width: 1px; height: 30px; float: left; background-color: rgb(16, 16, 48);"></span><span style="width: 1px; height: 30px; float: left; background-color: rgb(16, 16, 48);"></span><span style="width: 1px; height: 30px; float: left; background-color: rgb(16, 16, 48);"></span><span style="width: 1px; height: 30px; float: left; background-color: rgb(16, 16, 48);"></span><span style="width: 1px; height: 30px; float: left; background-color: rgb(16, 16, 48);"></span><span style="width: 1px; height: 30px; float: left; background-color: rgb(16, 16, 48);"></span></div></div><div style="text-align: left; line-height: 1.2em; padding: 0px 0px 3px 3px; display: none; background-color: rgb(8, 24, 8);"><div style="font-family: Helvetica, Arial, sans-serif; font-size: 9px; color: rgb(0, 255, 0); font-weight: bold;">MS</div><div style="position: relative; width: 74px; height: 30px; background-color: rgb(0, 255, 0);"><span style="width: 1px; height: 18.0408px; float: left; background-color: rgb(16, 48, 16);"></span><span style="width: 1px; height: 23.4154px; float: left; background-color: rgb(16, 48, 16);"></span><span style="width: 1px; height: 22.5838px; float: left; background-color: rgb(16, 48, 16);"></span><span style="width: 1px; height: 7.39448px; float: left; background-color: rgb(16, 48, 16);"></span><span style="width: 1px; height: 24.3411px; float: left; background-color: rgb(16, 48, 16);"></span><span style="width: 1px; height: 6.42238px; float: left; background-color: rgb(16, 48, 16);"></span><span style="width: 1px; height: 12.5036px; float: left; background-color: rgb(16, 48, 16);"></span><span style="width: 1px; height: 17.493px; float: left; background-color: rgb(16, 48, 16);"></span><span style="width: 1px; height: 10.9948px; float: left; background-color: rgb(16, 48, 16);"></span><span style="width: 1px; height: 16.1784px; float: left; background-color: rgb(16, 48, 16);"></span><span style="width: 1px; height: 21.6163px; float: left; background-color: rgb(16, 48, 16);"></span><span style="width: 1px; height: 12.0259px; float: left; background-color: rgb(16, 48, 16);"></span><span style="width: 1px; height: 12.1311px; float: left; background-color: rgb(16, 48, 16);"></span><span style="width: 1px; height: 6.24296px; float: left; background-color: rgb(16, 48, 16);"></span><span style="width: 1px; height: 12.4589px; float: left; background-color: rgb(16, 48, 16);"></span><span style="width: 1px; height: 16.8986px; float: left; background-color: rgb(16, 48, 16);"></span><span style="width: 1px; height: 2.17695px; float: left; background-color: rgb(16, 48, 16);"></span><span style="width: 1px; height: 0.0992077px; float: left; background-color: rgb(16, 48, 16);"></span><span style="width: 1px; height: 22.2668px; float: left; background-color: rgb(16, 48, 16);"></span><span style="width: 1px; height: 3.01036px; float: left; background-color: rgb(16, 48, 16);"></span><span style="width: 1px; height: 13.9055px; float: left; background-color: rgb(16, 48, 16);"></span><span style="width: 1px; height: 28.1476px; float: left; background-color: rgb(16, 48, 16);"></span><span style="width: 1px; height: 6.88963px; float: left; background-color: rgb(16, 48, 16);"></span><span style="width: 1px; height: 29.7317px; float: left; background-color: rgb(16, 48, 16);"></span><span style="width: 1px; height: 12.8501px; float: left; background-color: rgb(16, 48, 16);"></span><span style="width: 1px; height: 25.5064px; float: left; background-color: rgb(16, 48, 16);"></span><span style="width: 1px; height: 13.4392px; float: left; background-color: rgb(16, 48, 16);"></span><span style="width: 1px; height: 1.42068px; float: left; background-color: rgb(16, 48, 16);"></span><span style="width: 1px; height: 25.1295px; float: left; background-color: rgb(16, 48, 16);"></span><span style="width: 1px; height: 8.89322px; float: left; background-color: rgb(16, 48, 16);"></span><span style="width: 1px; height: 3.14498px; float: left; background-color: rgb(16, 48, 16);"></span><span style="width: 1px; height: 1.56449px; float: left; background-color: rgb(16, 48, 16);"></span><span style="width: 1px; height: 26.9241px; float: left; background-color: rgb(16, 48, 16);"></span><span style="width: 1px; height: 23.0751px; float: left; background-color: rgb(16, 48, 16);"></span><span style="width: 1px; height: 27.2514px; float: left; background-color: rgb(16, 48, 16);"></span><span style="width: 1px; height: 20.7712px; float: left; background-color: rgb(16, 48, 16);"></span><span style="width: 1px; height: 1.09951px; float: left; background-color: rgb(16, 48, 16);"></span><span style="width: 1px; height: 7.93529px; float: left; background-color: rgb(16, 48, 16);"></span><span style="width: 1px; height: 2.4395px; float: left; background-color: rgb(16, 48, 16);"></span><span style="width: 1px; height: 20.1007px; float: left; background-color: rgb(16, 48, 16);"></span><span style="width: 1px; height: 4.46506px; float: left; background-color: rgb(16, 48, 16);"></span><span style="width: 1px; height: 27.149px; float: left; background-color: rgb(16, 48, 16);"></span><span style="width: 1px; height: 11.7787px; float: left; background-color: rgb(16, 48, 16);"></span><span style="width: 1px; height: 23.8723px; float: left; background-color: rgb(16, 48, 16);"></span><span style="width: 1px; height: 25.3749px; float: left; background-color: rgb(16, 48, 16);"></span><span style="width: 1px; height: 1.31009px; float: left; background-color: rgb(16, 48, 16);"></span><span style="width: 1px; height: 21.9957px; float: left; background-color: rgb(16, 48, 16);"></span><span style="width: 1px; height: 16.475px; float: left; background-color: rgb(16, 48, 16);"></span><span style="width: 1px; height: 2.35192px; float: left; background-color: rgb(16, 48, 16);"></span><span style="width: 1px; height: 8.3141px; float: left; background-color: rgb(16, 48, 16);"></span><span style="width: 1px; height: 3.98689px; float: left; background-color: rgb(16, 48, 16);"></span><span style="width: 1px; height: 27.6424px; float: left; background-color: rgb(16, 48, 16);"></span><span style="width: 1px; height: 12.937px; float: left; background-color: rgb(16, 48, 16);"></span><span style="width: 1px; height: 23.8146px; float: left; background-color: rgb(16, 48, 16);"></span><span style="width: 1px; height: 14.0793px; float: left; background-color: rgb(16, 48, 16);"></span><span style="width: 1px; height: 12.09px; float: left; background-color: rgb(16, 48, 16);"></span><span style="width: 1px; height: 12.5841px; float: left; background-color: rgb(16, 48, 16);"></span><span style="width: 1px; height: 22.1391px; float: left; background-color: rgb(16, 48, 16);"></span><span style="width: 1px; height: 21.2894px; float: left; background-color: rgb(16, 48, 16);"></span><span style="width: 1px; height: 18.4617px; float: left; background-color: rgb(16, 48, 16);"></span><span style="width: 1px; height: 8.56427px; float: left; background-color: rgb(16, 48, 16);"></span><span style="width: 1px; height: 0.885106px; float: left; background-color: rgb(16, 48, 16);"></span><span style="width: 1px; height: 0.229857px; float: left; background-color: rgb(16, 48, 16);"></span><span style="width: 1px; height: 6.87638px; float: left; background-color: rgb(16, 48, 16);"></span><span style="width: 1px; height: 7.68779px; float: left; background-color: rgb(16, 48, 16);"></span><span style="width: 1px; height: 28.5928px; float: left; background-color: rgb(16, 48, 16);"></span><span style="width: 1px; height: 15.5615px; float: left; background-color: rgb(16, 48, 16);"></span><span style="width: 1px; height: 17.3972px; float: left; background-color: rgb(16, 48, 16);"></span><span style="width: 1px; height: 3.07052px; float: left; background-color: rgb(16, 48, 16);"></span><span style="width: 1px; height: 23.5855px; float: left; background-color: rgb(16, 48, 16);"></span><span style="width: 1px; height: 19.8043px; float: left; background-color: rgb(16, 48, 16);"></span><span style="width: 1px; height: 12.0223px; float: left; background-color: rgb(16, 48, 16);"></span><span style="width: 1px; height: 7.22016px; float: left; background-color: rgb(16, 48, 16);"></span><span style="width: 1px; height: 13.9417px; float: left; background-color: rgb(16, 48, 16);"></span></div></div></div></div>
+			
 			<canvas id="sketch" width="400" height="300"></canvas>
 			<div id="regularKeyboard">
 					<div class="key chromaC c0menu keyc"></div>
@@ -217,11 +227,6 @@
 				<input class="btn" type="button" value="start" onclick="startVideo()" id="startbutton">
 			</div>
 			<script>
-				// audio stuffz
-				// var context = new (window.AudioContext || window.webkitAudioContext)();
-				// var audioElement = document.querySelector('audio');
-				// var mediaSourceNode = context.createMediaElementSource(audioElement);
-				// mediaSourceNode.connect(filter);
 				var vid = document.getElementById('videoel');
 				var overlay = document.getElementById('overlay');
 				var overlayCC = overlay.getContext('2d');
@@ -233,20 +238,6 @@
 					startbutton.value = "start";
 					startbutton.disabled = null;
 				}
-
-				/*var insertAltVideo = function(video) {
-					if (supports_video()) {
-						if (supports_ogg_theora_video()) {
-							video.src = "../media/cap12_edit.ogv";
-						} else if (supports_h264_baseline_video()) {
-							video.src = "../media/cap12_edit.mp4";
-						} else {
-							return false;
-						}
-						//video.play();
-						return true;
-					} else return false;
-				}*/
 				navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia;
 				window.URL = window.URL || window.webkitURL || window.msURL || window.mozURL;
 
@@ -287,7 +278,7 @@
 				var keycodeMap = {'67':'c','68': 'd','69': 'e','70': 'f','71': 'g','65': 'a','66':'b','78':'n'}
 				var gameResult = [];
 				function keyupEvent(){
-					document.addEventListener("keyup", keyDownTextField, false);
+					document.addEventListener("keyup", _.throttle(keyDownTextField,250) , false);
 					function keyDownTextField(e) {
 						var keyCode = e.keyCode,
 								keyCodeStr = keyCode.toString();
@@ -298,18 +289,47 @@
 				}
 				level = {{level}};
 				webcamSpeed = 1;
+
+				var original_notes = ['c','d','e','f','g','a','b','n'];
+				audio_json = {};
+				audio_buffer_json = {};
+				var audioContext = new (window.AudioContext || window.webkitAudioContext)();
+				_.each(original_notes, function(n){
+				    var source = audioContext.createBufferSource();
+				    var request = new XMLHttpRequest();
+				    request.open('GET', './index_files/audio_files/'+n+'.wav', true);
+				    // request.open('GET', 'http://freewavesamples.com/files/Boom-Kick.wav', true);
+				    request.responseType = 'arraybuffer';
+				    // console.log(request.response);
+				    request.onload = function(){
+				        audioContext.decodeAudioData(request.response, function(buffer) {
+				            source.buffer = buffer;
+				            audio_buffer_json[n] = buffer;
+				            source.connect(audioContext.destination);
+				            audio_json[n] = source;
+				        });
+				    }
+				    request.send();
+				});
+				function checkDifference(correctAnswers, results){
+					var difference = 0;
+					results.forEach(function(e, i) {
+					    if (correctAnswers[i] != results[i]){
+					    	difference++;
+					    }
+					});
+					return difference;
+				}
+
 				function playMusic() {
-					_.debounce(keyupEvent(), 250);
+					keyupEvent();
 					var original_notes = ['c','d','e','f','g','a','b','n'];
 					var audio_arr = [];
-					_.each(original_notes, function(n){
-						var a = new Audio();
-						a.id = n;
-						a.src = './index_files/audio_files/'+n+'.wav';
-						audio_arr.push(a);
-					});
 
-					var songs = [{"speed" : 1, "notes" : ['g','g','a','a','g','g','e','g','g','e','e','d','g','g','a','a','g','g','e','g','e','d','e','c'] }, {"speed" : 1, "notes" : ['b','c','c','g'] }]
+					// var songs = [{"speed" : 1, "notes" : ['g','g','a','a','g','g','e','g','g','e','e','d'] }, {"speed" : 1, "notes" : ['b','c','c','g'] }]
+					// var orig_songs = [{"speed" : 1, "notes" : ['g','g','a','a','g','g','e','g','g','e','e','d'] }, {"speed" : 1, "notes" : ['b','c','c','g'] }]
+					var songs = [{"speed" : 1, "notes" : ['c','d','e'] }, {"speed" : 1, "notes" : ['b','c','c','g'] }]
+					var orig_songs = [{"speed" : 1, "notes" : ['c','d','e'] }, {"speed" : 1, "notes" : ['b','c','c','g'] }]
           var note_audio_array = [];
           _.each(songs[level].notes,function(note, idx){
               var note_audio = _.filter(audio_arr,function(a){
@@ -324,27 +344,28 @@
               var currentAudio = note_audio_array.shift();
               $('.key').css('background-color', 'white');
               $('.key' + currentNote).css('background-color', 'red');
-              currentAudio[level].play();
+              // currentAudio[level].play();
+                  audio_json[currentNote].start(0);
+                  audio_json[currentNote] = audioContext.createBufferSource();
+                  audio_json[currentNote].buffer = audio_buffer_json[currentNote];
+                  audio_json[currentNote].connect(audioContext.destination);
+                  // $('.key').css('background-color', 'white');
+                  // $('.key' + currentNote).css('background-color', 'red');
               if (note_audio_array.length > 0){
                   window.setTimeout(playAudio, currentTime);
               }else{
 								setTimeout(function(){
 									var result_json = {'level' : level, 'answers' : gameResult};
-									$.ajax({
-									  type: "POST",
-									  url: "/answers",
-									  data: JSON.stringify(result_json),
-									  contentType: 'application/json',
-									  success: function(){
-										if (level < 5) {
-											window.location = '/level/' + parseInt(level) + 1;
-										}
-									  },
-									  error: function(){
-									  	// window.location = '/fail';
-									  }
-									})
-								},1000);
+									console.log(orig_songs[level].notes);
+									console.log(gameResult);
+									console.log(orig_songs[level].notes == gameResult);
+									var diff = checkDifference(orig_songs[level].notes, gameResult);
+									if (diff == 0){
+										confirm('You WIN. Next level!');
+									} else {
+										alert('FAIL! You got ' + checkDifference(orig_songs[level].notes, gameResult) + ' wrong! ' + gameResult);
+									}
+								},1500);
 								document.getElementById('startbutton').disabled = false;
 
 							}
@@ -382,10 +403,12 @@
 
 						if (er[3].value < 0.4) {
 							webcamSpeed = 2;
+							$('.speed').text('SMILE MORE');
 							// mediaSourceNode.mediaElement.playbackRate += 0.002;
 							// console.log(mediaSourceNode.mediaElement.playbackRate);
 						} else {
 							webcamSpeed = 1;
+							$('.speed').text('GOOD JOB');
 						}
 						if (er[1].value > 0.4) {
 							// mediaSourceNode.mediaElement.playbackRate -= 0.002;
@@ -488,7 +511,7 @@
 				stats = new Stats();
 				stats.domElement.style.position = 'absolute';
 				stats.domElement.style.top = '0px';
-				document.getElementById('container').appendChild( stats.domElement );
+				// document.getElementById('container').appendChild( stats.domElement );
 
 				// update stats on every iteration
 				document.addEventListener('clmtrackrIteration', function(event) {
