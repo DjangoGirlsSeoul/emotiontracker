@@ -93,13 +93,11 @@
                             source.buffer = buffer;
                             audio_buffer_json[n] = buffer;
                             source.connect(audioContext.destination);
-                            console.log(source);
                             audio_json[n] = source;
                         });
                     }
                     request.send();
                 });
-                console.log(audio_json);
                 function keyupEvent(){
                     document.addEventListener("keyup", _.throttle(keyDownTextField,400), false);
                     function keyDownTextField(e) {
@@ -107,6 +105,82 @@
                                 keyCodeStr = keyCode.toString();
                         if(Object.keys(keycodeMap).indexOf(keyCodeStr) != -1){
                             currentNote = keycodeMap[keyCodeStr];
+                            switch(currentNote) {
+                                case 'c':
+                                    _.throttle(function(){
+                                        audio_json[currentNote].start(0);
+                                        audio_json[currentNote] = audioContext.createBufferSource();
+                                        audio_json[currentNote].buffer = audio_buffer_json[currentNote];
+                                        audio_json[currentNote].connect(audioContext.destination);
+                                        $('.key').css('background-color', 'white');
+                                        $('.key' + currentNote).css('background-color', 'red');
+                                    }, 400)
+                                case 'd':
+                                    _.throttle(function(){
+                                        audio_json[currentNote].start(0);
+                                        audio_json[currentNote] = audioContext.createBufferSource();
+                                        audio_json[currentNote].buffer = audio_buffer_json[currentNote];
+                                        audio_json[currentNote].connect(audioContext.destination);
+                                        $('.key').css('background-color', 'white');
+                                        $('.key' + currentNote).css('background-color', 'red');
+                                    }, 400)
+                                case 'e':
+                                    _.throttle(function(){
+                                        audio_json[currentNote].start(0);
+                                        audio_json[currentNote] = audioContext.createBufferSource();
+                                        audio_json[currentNote].buffer = audio_buffer_json[currentNote];
+                                        audio_json[currentNote].connect(audioContext.destination);
+                                        $('.key').css('background-color', 'white');
+                                        $('.key' + currentNote).css('background-color', 'red');
+                                    }, 400)
+                                case 'f':
+                                    _.throttle(function(){
+                                        audio_json[currentNote].start(0);
+                                        audio_json[currentNote] = audioContext.createBufferSource();
+                                        audio_json[currentNote].buffer = audio_buffer_json[currentNote];
+                                        audio_json[currentNote].connect(audioContext.destination);
+                                        $('.key').css('background-color', 'white');
+                                        $('.key' + currentNote).css('background-color', 'red');
+                                    }, 400)
+                                case 'g':
+                                    _.throttle(function(){
+                                        audio_json[currentNote].start(0);
+                                        audio_json[currentNote] = audioContext.createBufferSource();
+                                        audio_json[currentNote].buffer = audio_buffer_json[currentNote];
+                                        audio_json[currentNote].connect(audioContext.destination);
+                                        $('.key').css('background-color', 'white');
+                                        $('.key' + currentNote).css('background-color', 'red');
+                                    }, 400)
+                                case 'a':
+                                    _.throttle(function(){
+                                        audio_json[currentNote].start(0);
+                                        audio_json[currentNote] = audioContext.createBufferSource();
+                                        audio_json[currentNote].buffer = audio_buffer_json[currentNote];
+                                        audio_json[currentNote].connect(audioContext.destination);
+                                        $('.key').css('background-color', 'white');
+                                        $('.key' + currentNote).css('background-color', 'red');
+                                    }, 400)
+                                case 'b':
+                                    _.throttle(function(){
+                                        audio_json[currentNote].start(0);
+                                        audio_json[currentNote] = audioContext.createBufferSource();
+                                        audio_json[currentNote].buffer = audio_buffer_json[currentNote];
+                                        audio_json[currentNote].connect(audioContext.destination);
+                                        $('.key').css('background-color', 'white');
+                                        $('.key' + currentNote).css('background-color', 'red');
+                                    }, 400)
+                                case 'n':
+                                    _.throttle(function(){
+                                        audio_json[currentNote].start(0);
+                                        audio_json[currentNote] = audioContext.createBufferSource();
+                                        audio_json[currentNote].buffer = audio_buffer_json[currentNote];
+                                        audio_json[currentNote].connect(audioContext.destination);
+                                        $('.key').css('background-color', 'white');
+                                        $('.key' + currentNote).css('background-color', 'red');
+                                    }, 400)
+                                default:
+                                    console.log('no key');
+                            }
                             audio_json[currentNote].start(0);
                             audio_json[currentNote] = audioContext.createBufferSource();
                             audio_json[currentNote].buffer = audio_buffer_json[currentNote];
@@ -116,7 +190,7 @@
                         }
                     }
                 }
-                keyupEvent();
+                keyupEvent()
             </script>
 
         </div>
