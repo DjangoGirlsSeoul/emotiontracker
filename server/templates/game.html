@@ -3,7 +3,7 @@
 <html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Face tracker</title>
 
-        <link href="./index_files/bootstrap.min.css" rel="stylesheet" type="text/css">
+        <link href="/index_files/bootstrap.min.css" rel="stylesheet" type="text/css">
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
         <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s=" crossorigin="anonymous"></script>
     <style>
@@ -97,7 +97,7 @@
             _.each(original_notes, function(n){
                 var source = audioContext.createBufferSource();
                 var request = new XMLHttpRequest();
-                request.open('GET', './index_files/audio_files/'+n+'.wav', true);
+                request.open('GET', '/index_files/audio_files/'+n+'.wav', true);
                 // request.open('GET', 'http://freewavesamples.com/files/Boom-Kick.wav', true);
                 request.responseType = 'arraybuffer';
                 // console.log(request.response);
@@ -151,19 +151,19 @@
                     window.setTimeout(playAudio, currentTime);
                 }else{
                   setTimeout(function(){
-                    console.log("@@@@@@@@@@@@@@@" + gameResult);
                     var result_json = {'level' : level, 'answers' : gameResult};
                     $.ajax({
                       type: "POST",
-                      url: "/answers",
+                      url: "/game/answers",
                       data: JSON.stringify(result_json),
                       contentType: 'application/json',
                       success: function(){
                       if (level < 5) {
-                        window.location = '/level/' + parseInt(level) + 1;
+                        window.location = '/game/level/' + parseInt(level) + 1;
                       }
                       },
                       error: function(){
+                        window.alert("Faaaaaaail");
                         // window.location = '/fail';
                       }
                     })
