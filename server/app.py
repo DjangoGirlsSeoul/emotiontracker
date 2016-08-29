@@ -36,7 +36,6 @@ def game_level(level):
         return render_template('win.html')
 
 ##{'[{"emotion":"angry","value":0.03350348808431149},{"emotion":"sad","value":0.31215305776434915},{"emotion":"surprised","value":0.16222857011091235},{"emotion":"happy","value":0.04008017326503987}]': u''}
-# @app.route('/emotions', methods=['POST'])
 def get_emotions():
     emotions = request.get_json()
     happy_point = request.json[3]['value']
@@ -47,7 +46,6 @@ def get_emotions():
 @app.route('/answers', methods=['POST'])
 def check_answers():
     # {level: 1, answers: ['a', 'b', 'c', 'g']}
-
     answers_level = request.get_json()
     print(answers_level);
     current_level = answers_level['level']
@@ -75,8 +73,6 @@ def check_game_answers():
         abort(404)
         print('FIAIL')
         return render_template('fail.html')
-
-
 
 @app.route('/index_files/<path:path>')
 def send_js(path):

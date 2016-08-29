@@ -196,7 +196,7 @@
 					</div>
 					<div id="emotion_chart"><svg width="440" height="100"><rect x="40" y="70" height="0" width="30" fill="#2d578b"></rect><rect x="125" y="70" height="0" width="30" fill="#2d578b"></rect><rect x="210" y="70" height="0" width="30" fill="#2d578b"></rect><rect x="295" y="70" height="0" width="30" fill="#2d578b"></rect><text x="70" y="70" dx="-15" dy="1.2em" text-anchor="middle" fill="white" class="labels">0</text><text x="155" y="70" dx="-15" dy="1.2em" text-anchor="middle" fill="white" class="labels">0</text><text x="240" y="70" dx="-15" dy="1.2em" text-anchor="middle" fill="white" class="labels">0</text><text x="325" y="70" dx="-15" dy="1.2em" text-anchor="middle" fill="white" class="labels">0</text><text x="70" y="70" dx="-15" text-anchor="middle" style="font-size: 12" transform="translate(0, 18)" class="yAxis">angry</text><text x="155" y="70" dx="-15" text-anchor="middle" style="font-size: 12" transform="translate(0, 18)" class="yAxis">sad</text><text x="240" y="70" dx="-15" text-anchor="middle" style="font-size: 12" transform="translate(0, 18)" class="yAxis">surprised</text><text x="325" y="70" dx="-15" text-anchor="middle" style="font-size: 12" transform="translate(0, 18)" class="yAxis">happy</text></svg></div>
 				</div>
-			
+
 			<canvas id="sketch" width="400" height="300"></canvas>
 			<div id="regularKeyboard">
 					<div class="key chromaC c0menu keyc"></div>
@@ -382,10 +382,9 @@
 					// start tracking
 					ctrack.start(vid);
 					// start loop to draw face
-					// setInterval(function(){
-						drawLoop();
-					// },100)
+					drawLoop();
 				}
+
 				function drawLoop() {
 					requestAnimFrame(drawLoop);
 					overlayCC.clearRect(0, 0, 400, 300);
@@ -400,7 +399,6 @@
 					if (er) {
 						updateData(er);
 						// if (er[3])
-
 						if (er[3].value < 0.4) {
 							webcamSpeed = 2;
 							$('.speed').text('SMILE MORE');
